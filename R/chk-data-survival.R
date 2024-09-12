@@ -47,7 +47,7 @@
 #' x <- bbousurv_c
 #' x[1, 3] <- 14L
 #' try(bbd_chk_data_survival(x))
-bbd_chk_data_survival <- function(data, x_name = deparse(substitute(data))) {
+bbd_chk_data_survival <- function(data, x_name = deparse(substitute(data)),multi_pops=F) {
   nms <- c(
     "PopulationName", "Year", "Month", "StartTotal",
     "MortalitiesCertain", "MortalitiesUncertain"
@@ -56,7 +56,7 @@ bbd_chk_data_survival <- function(data, x_name = deparse(substitute(data))) {
 
   chk::chk_character_or_factor(data$PopulationName, x_name = xname(x_name, "PopulationName"))
   chk::chk_not_any_na(data$PopulationName, x_name = "PopulationName")
-  .chk_population(data)
+  if(!multi_pops){.chk_population(data)}
 
   chk::chk_whole_numeric(data$Year, x_name = xname(x_name, "Year"))
   chk::chk_gte(data$Year, 0, x_name = xname(x_name, "Year"))

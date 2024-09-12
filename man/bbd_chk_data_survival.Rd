@@ -20,7 +20,7 @@ confirmed in that month. Must be a positive integer.}
 }
 }
 \usage{
-bbd_chk_data_survival(data, x_name = deparse(substitute(data)))
+bbd_chk_data_survival(data, x_name = deparse(substitute(data)), multi_pops = F)
 }
 \arguments{
 \item{data}{The data frame check.}
