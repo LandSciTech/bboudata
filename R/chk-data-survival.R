@@ -47,7 +47,7 @@
 #' x <- bbousurv_c
 #' x[1, 3] <- 14L
 #' try(bbd_chk_data_survival(x))
-bbd_chk_data_survival <- function(data, x_name = deparse(substitute(data)),multi_pops=F) {
+bbd_chk_data_survival <- function(data, x_name = deparse(substitute(data)),multi_pops=F,allow_missing=F) {
   nms <- c(
     "PopulationName", "Year", "Month", "StartTotal",
     "MortalitiesCertain", "MortalitiesUncertain"
@@ -78,9 +78,10 @@ bbd_chk_data_survival <- function(data, x_name = deparse(substitute(data)),multi
   chk::chk_not_any_na(data$Year, x_name = "Year")
   chk::chk_not_any_na(data$Month, x_name = "Month")
   chk::chk_not_any_na(data$StartTotal, x_name = "StartTotal")
-  chk::chk_not_any_na(data$MortalitiesCertain, x_name = "MortalitiesCertain")
-  chk::chk_not_any_na(data$MortalitiesUncertain, x_name = "MortalitiesUncertain")
-
+  if(allow_missing){
+    chk::chk_not_any_na(data$MortalitiesCertain, x_name = "MortalitiesCertain")
+    chk::chk_not_any_na(data$MortalitiesUncertain, x_name = "MortalitiesUncertain")
+  }
   .chk_sum_less(data, c("MortalitiesCertain", "MortalitiesUncertain"), "StartTotal")
 
   invisible(data)
