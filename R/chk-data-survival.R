@@ -77,8 +77,8 @@ bbd_chk_data_survival <- function(data, x_name = deparse(substitute(data)),multi
 
   chk::chk_not_any_na(data$Year, x_name = "Year")
   chk::chk_not_any_na(data$Month, x_name = "Month")
-  chk::chk_not_any_na(data$StartTotal, x_name = "StartTotal")
   if(!allow_missing){
+    chk::chk_not_any_na(data$StartTotal, x_name = "StartTotal")
     chk::chk_not_any_na(data$MortalitiesCertain, x_name = "MortalitiesCertain")
     chk::chk_not_any_na(data$MortalitiesUncertain, x_name = "MortalitiesUncertain")
     .chk_sum_less(data, c("MortalitiesCertain", "MortalitiesUncertain"), "StartTotal")
