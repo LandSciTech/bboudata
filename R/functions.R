@@ -19,8 +19,8 @@
   chk::abort_chk("'PopulationName' can only contain one unique value.")
 }
 
-.chk_sum_less <- function(x, colsum, coltot) {
-  if (.vld_sum_less(x, colsum, coltot)) {
+.chk_sum_less <- function(x, colsum, coltot,na.rm=F) {
+  if (.vld_sum_less(x, colsum, coltot,na.rm=na.rm)) {
     return(invisible())
   }
   chk::abort_chk(
@@ -34,8 +34,8 @@
   )
 }
 
-.vld_sum_less <- function(x, colsum, coltot) {
-  all(rowSums(x[colsum]) <= x[[coltot]])
+.vld_sum_less <- function(x, colsum, coltot,na.rm=F) {
+  all(rowSums(x[colsum]) <= x[[coltot]],na.rm=na.rm)
 }
 
 .vld_population <- function(x) {
